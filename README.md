@@ -79,3 +79,13 @@ back to the main menu
 
 By 1/23 or the due date: Make sure there are no bugs and the program
 is working as it should.
+
+## Required Libaries:
+<stdlib.h>
+<stdio.h>
+<strings.h>
+<signal.h>
+<sys/stat.h>
+<sys/wait.h>
+<fcntl.h>
+<unistd.h>
