@@ -81,7 +81,7 @@ By 1/23 or the due date: Make sure there are no bugs and the program
 is working as it should.
 
 ## Required Libaries:
-<stdlib.h>
+<stdlib.h> \n
 <stdio.h>
 <strings.h>
 <signal.h>
