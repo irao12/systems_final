@@ -21,17 +21,19 @@ while (1){
       create_acc();
       con = 0;
     } 
-    /*else if (!strcmp(line, "login")){
-      login();
+    else if (!strcmp(line, "login")){
+      login(&entry);
       con = 0;
     }
-    */
+    
     else {
       printf("Try again\n");
     }
   }
   while (entry){
-
+    char prompt[10];
+    printf("Would you like to \"see\", \"add\", or \"update\"\n");
+    fgets(prompt, sizeof(prompt), stdin);
   }
 }
   return 0;
