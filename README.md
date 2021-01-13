@@ -53,7 +53,7 @@ be extra commands once the main features are working.
   added/updated.
 
 ### Breakdown of parts:
-- Ivan will work setting up the fork so that the program 
+- Ivan will work on setting up the main menu and fork so that the program 
 continues to prompt the user until the user quits.
 
 - Gene will work on creating functionality to add/change/remove 
