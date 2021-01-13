@@ -1,0 +1,6 @@
+1/12/2021 (Ivan):
+ - Added the main menu where you can create or log in to your Password Manager account
+ - Added the functionality of creating an account
+    - checks if an account with the name you chose exists, asks you to repeat if there is.
+    
+  
