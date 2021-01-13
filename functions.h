@@ -5,7 +5,7 @@ void remover(char* buffer);
 
 void create_acc();
 
-void login();
+void login(int * entry);
 
 void sighandler(int signo);
 #endif
