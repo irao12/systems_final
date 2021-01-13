@@ -1,6 +1,11 @@
-1/12/2021 (Ivan):
- - Added the main menu where you can create or log in to your Password Manager account
+1/12/2021, 11:31 P.M (Ivan):
+ - Added the login menu where you can create or log in to your Password Manager account
  - Added the functionality of creating an account
-    - checks if an account with the name you chose exists, asks you to repeat if there is.
+   - checks if an account with the name you chose exists, asks you to repeat if there is.
     
+1/13/2021, 10:40 A.M (Ivan):
+ - Added the functionality of logging into an account
+   -checks if an account with the username inputted exists. Reprompts you to enter one if it doesn't.
+    If it does, it will ask you for a password. If the password is wrong, the whole login process will
+    restart. If it is correct, you will enter the main menu.
   
