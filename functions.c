@@ -25,7 +25,6 @@ int pass_length(char* buffer){
     i++;
     count++;
   }
-  printf("count: %d", count);
   return count;
 }
 
