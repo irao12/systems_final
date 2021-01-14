@@ -1,14 +1,14 @@
-all: main.o functions.o functions.h
-	gcc -o program main.o functions.o functions.h
+all: main.o menu.o menu.h
+	gcc -o program main.o menu.o menu.h
   
-main.o: main.c functions.h
+main.o: main.c menu.h
 	gcc -c main.c
 
-functions.o: functions.c functions.c
-	gcc -c functions.c functions.h
+menu.o: menu.c menu.c
+	gcc -c menu.c menu.h
 
 clean: 
-	rm *.o
+	rm *.o *.gch
 
 run:
 	./program
