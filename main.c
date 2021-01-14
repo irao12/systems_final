@@ -14,9 +14,9 @@ setup();
 while (1){
   char line[100];
   printf("Welcome to the Password Manager\n");
-  char test = 48;
   int con = 1;
   int entry = 0;
+  char *user;
   while (con){
     printf("Enter \"login\" to log in or \"create\" to create a new account\nfor the password manager\n");
     fgets(line, sizeof(line), stdin);
@@ -26,7 +26,7 @@ while (1){
       con = 0;
     } 
     else if (!strcmp(line, "login")){
-      login(&entry);
+      user = login(&entry);
       con = 0;
     }
     
