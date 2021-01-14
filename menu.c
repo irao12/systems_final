@@ -9,13 +9,13 @@
 #include <dirent.h>
 
 void setup(){
-  DIR* dir = opendir("accounts");
+  DIR* dir = opendir("data");
   if (!dir){
-    mkdir("accounts", 0666);
+    mkdir("data", 0777);
   }
-  dir = opendir("data");
+  dir = opendir("data/accounts");
   if (!dir){
-    mkdir("data", 0666);
+    mkdir("data/accounts", 0777);
   }
 }
 
@@ -38,7 +38,7 @@ void create_acc(){
     fgets(usr, sizeof(usr), stdin);
     remover(usr);
     char location[100];
-    strcpy(location, "accounts/");
+    strcpy(location, "data/accounts/");
     strcat(location, usr);
     int file = open(location, O_RDWR);
     if (file>0) {
@@ -52,7 +52,7 @@ void create_acc(){
       char dat_loc[100];
       strcpy(dat_loc, "data/");
       strcat(dat_loc, usr);
-      int test = mkdir(dat_loc, 0666);
+      int test = mkdir(dat_loc, 0777);
       if (test == -1){
         printf("error: %s", strerror(errno));
       }
@@ -64,8 +64,8 @@ void create_acc(){
   }
 }
 
-void login(int * entry){
-  char usr[50], usr_entered[50];
+char * login(int * entry){
+  char * usr_entered = malloc(sizeof(char)*51);
   char pass[31], pass_entered[31];
   char location[100];
   int con = 1;
@@ -74,7 +74,7 @@ void login(int * entry){
     printf("\nEnter your username\n");
     fgets(usr_entered, sizeof(usr_entered), stdin);
     remover(usr_entered);
-    strcpy(location, "accounts/");
+    strcpy(location, "data/accounts/");
     strcat(location, usr_entered);
     fp = fopen(location, "r");
     if (!fp){
@@ -96,4 +96,5 @@ void login(int * entry){
       }
     }
   }
+  return usr_entered;
 }
