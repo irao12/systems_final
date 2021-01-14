@@ -1,12 +1,16 @@
-#include "functions.h"
+#include "menu.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <signal.h>
+#include <errno.h>
+#include <sys/stat.h>
 
 int main(void) {
+umask(0000);
+setup();
 while (1){
   char line[100];
   printf("Welcome to the Password Manager\n");
