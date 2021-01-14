@@ -14,3 +14,8 @@
  - Changed functions.c and functions.h to menu.c and menu.h for convenience
  - Now creates a folder for the user in the data directory to store account information
 
+1/14/2021, 6:42 P.M (Ivan, Gene, and Alex):
+ - Implemented forks for the program so the child can return an int to the parent
+ - Fixed a bug where file could not be added to the directories created
+    - was fixed with umask
+ 
