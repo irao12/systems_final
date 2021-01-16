@@ -30,7 +30,7 @@ void remover(char* buffer)
 
 void create_acc(){
   char usr[50];
-  char pass[31];
+  char pass[31], re_pass[31];
   int i;
   int con = 1;
   while (con){
@@ -46,8 +46,16 @@ void create_acc(){
     }
     else {
       file = open(location, O_RDWR | O_CREAT, 0666);
-      printf("\nEnter a password for this account (max 30 characters)\n");
-      fgets(pass,sizeof(pass), stdin);
+      while(1){
+        printf("\nEnter a password for this account (max 30 characters)\n");
+        fgets(pass,sizeof(pass), stdin);
+        printf("\nReenter to Confirm your password\n");
+        fgets(re_pass,sizeof(pass), stdin);
+        if (!strcmp(pass, re_pass)){
+          break;
+        }
+        else printf("\nPasswords do not match");
+      }
       write(file, pass, sizeof(pass));
       char dat_loc[100];
       strcpy(dat_loc, "data/");
@@ -57,7 +65,7 @@ void create_acc(){
         printf("error: %s", strerror(errno));
       }
       
-      printf("Account has been created\n\n");
+      printf("\nAccount has been created\n\n");
 
       con = 0;
     }
@@ -98,3 +106,5 @@ char * login(int * entry){
   }
   return usr_entered;
 }
+
+     

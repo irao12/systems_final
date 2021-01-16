@@ -18,4 +18,11 @@
  - Implemented forks for the program so the child can return an int to the parent
  - Fixed a bug where file could not be added to the directories created
     - was fixed with umask
- 
+
+1/16/2021 12:00 PM (Gene, Ivan)
+ - Implemented a command to "add" entries to the password manager 
+    - Store data that the user inputs into a struct
+    - Use the struct to then add the data into a file 
+    - Create a file underneath the user folder in the data directory with the name of entry
+- Implemented a command to "see" the contents of a specific entry
+    - Display the contents of a specific entry in the terminal 
