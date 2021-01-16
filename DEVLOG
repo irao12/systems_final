@@ -19,7 +19,7 @@
  - Fixed a bug where file could not be added to the directories created
     - was fixed with umask
 
-1/16/2021 12:00 PM (Gene, Ivan)
+1/16/2021 12:00 PM (Gene, Alex)
  - Implemented a command to "add" entries to the password manager 
     - Store data that the user inputs into a struct
     - Use the struct to then add the data into a file 
