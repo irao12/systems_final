@@ -101,21 +101,35 @@ void convert(struct acct *anEntry, char * user){
 
 void see (char * user) {
   char text [100];
-  printf("\nWhat entry would you like to view the contents of?\n");
+  printf("\nWhat entry would you like to view the contents of?\nType \"cancel\" to go back\n");
   fgets(text, sizeof(text), stdin);
   remover(text);
-  printEntry(text, user);
+
+  if (!strcmp(text, "cancel")) {
+    return;
+  }
+  else {
+    printEntry(text, user);
+  }
 }
 
 void add (char * userAcct) {
   char text [100], type [100], usr [100], pw [100], mail [100], prompt [10], loc [100];
   int con = 1;
   struct acct *acc_entry;
+
+  printf ("\nAdding account...\nType \"cancel\" at anytime to go back\n");
+
   while (con) {
     while (1) {
       printf("\nWhat account would you like to add?\n");
       fgets(type, sizeof(type), stdin);
       remover(type);
+
+      if (!strcmp(type, "cancel")) {
+        break;
+      }
+
       strncpy(loc, "data/", sizeof(loc)-1);
       strncat(loc, userAcct, sizeof(loc)-1);
       strncat(loc, "/", sizeof(loc)-1);
@@ -126,27 +140,43 @@ void add (char * userAcct) {
       }
       else printf("\nAn Account with this type already exists\n");
     }
+
+    if (!strcmp(type, "cancel")) {
+      break;
+    } 
           
     printf("\nWhat is the username of said account?\n");
     fgets(usr,sizeof(usr),stdin);
-    remover(usr);     
+    remover(usr);
+
+    if (!strcmp(usr, "cancel")) {
+      break;
+    }      
       
     printf("\nWhat is the password of said account?\n");
-    fgets(pw,sizeof(pw),stdin);
+    fgets(pw, sizeof(pw), stdin);
     remover(pw);
+
+    if (!strcmp(pw, "cancel")) {
+      break;
+    } 
             
     printf("\nWhat is your email of said account?\n");
-    fgets(mail,sizeof(mail),stdin);
+    fgets(mail, sizeof(mail), stdin);
     remover(mail);
+
+    if (!strcmp(mail, "cancel")) {
+      break;
+    } 
         
     acc_entry = new_entry(type,usr,pw,mail);
     printf("\nAccount type: %s\nUsername: %s\nPassword: %s\nEmail: %s\n", acc_entry->acctType, acc_entry->username, acc_entry->password, acc_entry->email);
     printf("\nIs this correct? \"yes\" or \"no\"\n");
           
-    while(1){
+    while(1) {
       fgets(prompt,sizeof(prompt),stdin);
       remover(prompt);
-      if(!strcmp(prompt,"yes")){
+      if (!strcmp(prompt,"yes")) {
         con = 0;
         break;
       }
@@ -154,12 +184,22 @@ void add (char * userAcct) {
         printf ("Please correctly enter the information\n");
         break;
       }
+      else if (!strcmp(prompt, "cancel")) {
+        con = 0;
+        break;
+      }
       else printf("Is this correct? \"yes\" or \"no\"\n");
     }
   }
-convert(acc_entry,userAcct);    
 
-printf("\nEntry added\n");
+  if (!strcmp(type, "cancel") || !strcmp(usr, "cancel") || !strcmp(pw, "cancel") || !strcmp(mail, "cancel") || !strcmp(prompt, "cancel")) {
+    printf ("\nCancelling entry...\n");
+    return;
+  }
+  else {
+    convert(acc_entry,userAcct);    
+    printf("\nEntry added\n");
+  }
 }
 
 //account_type-what type of account it is
@@ -167,84 +207,23 @@ printf("\nEntry added\n");
 //takes argument for string with data
 
 //updates one part of an account's entry
-
-void update (char * user, char * new_data, char * account_type, char* entry_type) {
-  
-  struct acct * temp_entry = malloc(sizeof(struct acct));
-  char * username;
-  char * password;
-  char * email;
-
-  char loc [100];
-  strncpy(loc, "data/", sizeof(loc)-1);
-  strncat(loc, user, sizeof(loc)-1);
-  strncat(loc, "/", sizeof(loc)-1);
-  strncat(loc, account_type, sizeof(loc)-1);
-  remover(loc);
-  
-  char line [100];
-  char * y = line;
-  char * token, * p;
-  FILE * fp;
-  fp = fopen(loc, "r");
-  fgets (y, 100, fp);
-  p = y;
-  fclose(fp);
-  //Account type, username, password, email, last updated
-
-  if (!strcmp(entry_type, "username")) {
-    strsep (&p, ",");
-    username = new_data;
-    strsep (&p,",");
-    password = strsep (&p, ",");
-    email = strsep(&p,",");
-  }
-  if (!strcmp(entry_type, "password")) {
-    strsep (&p, ",");
-    username = strsep (&p, ",");
-    password = new_data;
-    strsep (&p, ","); 
-    email = strsep(&p, ",");
-  }
-  if (!strcmp(entry_type, "email")) {
-    strsep (&p, ",");
-    username = strsep (&p, ",");
-    password = strsep (&p, ",");
-    email = new_data;
-    strsep (&p, ",");
-  }
-
-  temp_entry = new_entry (account_type, username, password, email);
-  printf("\nAccount type: %s\nUsername: %s\nPassword: %s\nEmail: %s\n", temp_entry->acctType, temp_entry->username, temp_entry->password, temp_entry->email);
-  printf("\nIs this correct? \"yes\" or \"no\"\n");
-  
-  char prompt [10];
-  while (1) {
-    fgets (prompt, sizeof(prompt), stdin);
-    remover(prompt);
-    if(!strcmp(prompt, "yes")) {
-      convert (temp_entry, user);
-      printf ("Update successful\n");
-      break;
-    }
-    else if (!strcmp(prompt, "no")) {
-      printf ("Update cancelled\n");
-      break;
-    }
-    else printf("Is this correct? \"yes\" or \"no\"\n");
-  }
-}
-
-
-void update_start(char * user){
+void update_start (char * user) {
   char update_acc [100];
   char update_entry [100];
   char update_data [100];
 
+  printf ("\nUpdating entry...\nType \"cancel\" at anytime to go back\n");
+  
+  int con = 1;
+  while (con) {
     while (1) {
       printf ("\nWhat account would you like to update?\n");
       fgets (update_acc, sizeof(update_acc), stdin);
-            remover (update_acc);
+      remover (update_acc);
+
+      if (!strcmp(update_acc, "cancel")) {
+        break;
+      } 
 
       char loc [100];
       strncpy (loc, "data/", sizeof(loc)-1);
@@ -261,6 +240,10 @@ void update_start(char * user){
       }
     }
 
+    if (!strcmp (update_acc, "cancel")) {
+      break;
+    }
+
     printEntry (update_acc, user);
 
     while (1) {
@@ -268,8 +251,11 @@ void update_start(char * user){
       fgets (update_entry, sizeof(update_entry), stdin);
       remover (update_entry);
 
-      if (!strcmp(update_entry, "username") || !strcmp(update_entry, "password") || !strcmp(update_entry, "email")) {
-         break;
+      if (!strcmp(update_entry, "cancel")) {
+        break;
+      } 
+      else if (!strcmp(update_entry, "username") || !strcmp(update_entry, "password") || !strcmp(update_entry, "email")) {
+          break;
       }
       else {
         printf("\nPlease enter a valid entry\n");
@@ -277,11 +263,92 @@ void update_start(char * user){
       }
     }
 
+    if (!strcmp(update_entry, "cancel")) {
+      break;
+    } 
+
     printf ("\nWhat would you like to update it to?\n");
     fgets (update_data, sizeof(update_data), stdin);
     remover (update_data);
 
-    update (user, update_data, update_acc, update_entry);
+    if (!strcmp(update_data, "cancel")) {
+      break;
+    }
+    
+    struct acct * temp_entry = malloc(sizeof(struct acct));
+    char * username;
+    char * password;
+    char * email;
+
+    char loc [100];
+    strncpy(loc, "data/", sizeof(loc)-1);
+    strncat(loc, user, sizeof(loc)-1);
+    strncat(loc, "/", sizeof(loc)-1);
+    strncat(loc, update_acc, sizeof(loc)-1);
+    remover(loc);
+    
+    char line [100];
+    char * y = line;
+    char * token, * p;
+    FILE * fp;
+    fp = fopen(loc, "r");
+    fgets (y, 100, fp);
+    p = y;
+    fclose(fp);
+
+    if (!strcmp(update_entry, "username")) {
+      strsep (&p, ",");
+      username = update_data;
+      strsep (&p,",");
+      password = strsep (&p, ",");
+      email = strsep(&p,",");
+    }
+    else if (!strcmp(update_entry, "password")) {
+      strsep (&p, ",");
+      username = strsep (&p, ",");
+      password = update_data;
+      strsep (&p, ","); 
+      email = strsep(&p, ",");
+    }
+    else if (!strcmp(update_entry, "email")) {
+      strsep (&p, ",");
+      username = strsep (&p, ",");
+      password = strsep (&p, ",");
+      email = update_data;
+      strsep (&p, ",");
+    }
+
+    temp_entry = new_entry (update_acc, username, password, email);
+    printf("\nAccount type: %s\nUsername: %s\nPassword: %s\nEmail: %s\n", temp_entry->acctType, temp_entry->username, temp_entry->password, temp_entry->email);
+    printf("\nIs this correct? \"yes\" or \"no\"\n");
+
+    char prompt [10];
+    while (1) {
+      fgets (prompt, sizeof(prompt), stdin);
+      remover(prompt);
+
+      if(!strcmp(prompt, "yes")) {
+        convert (temp_entry, user);
+        printf ("Update successful\n");
+        con = 0;
+        break;
+      }
+      else if (!strcmp(prompt, "no")) {
+        printf ("\nPlease re-enter the information correctly\n");
+        break;
+      }
+      else if (!strcmp(prompt, "cancel")) {
+        printf ("\nCancelling update...\n");
+        con = 0;
+        break;
+      }
+      else printf("Is this correct? \"yes\" or \"no\"\n");
+    }
+  }
+  if (!strcmp (update_acc, "cancel") || !strcmp(update_entry, "cancel") || !strcmp(update_data, "cancel")) {
+    printf ("\nCancelling update...\n");
+    return;
+  }
 }
 
 void list(char *user){
@@ -317,16 +384,23 @@ void list(char *user){
 void remove_entry (char * user){
   char loc[100], entry[100];
   int con = 1;
-  while (con){
+
+  printf ("\nRemoving entry...\nType \"cancel\" at anytime to go back\n");
+  while (con) {
     strncpy(loc, "data/", sizeof(loc)-1);
     strncat(loc, user, sizeof(loc)-1);
     strncat(loc, "/", sizeof(loc)-1);
     printf("\nWhich entry would you like to remove\n");
     fgets(entry, sizeof(entry), stdin);
     remover(entry);
+
+    if (!strcmp (entry, "cancel")) {
+      break;
+    }
+
     strncat(loc, entry, sizeof(loc)-1);
     int fd = open(loc, O_RDONLY);
-    if (fd < 0){
+    if (fd < 0) {
       printf("\nThe entry \"%s\" does not exist\n", entry);
     }
     else {
@@ -343,11 +417,22 @@ void remove_entry (char * user){
           break;
         }
         else if (!strcmp(prompt, "no")){
+          printf ("\nPlease re-enter the information correctly\n");
           close(fd);
+          break;
+        }
+        else if (!strcmp(prompt, "cancel")) {
+          printf ("\nCancelling removal...\n");
+          close (fd);
           con = 0;
           break;
         }
+        else printf ("\nAre you sure you want to remove this entry, \"yes\" or \"no\"?\n");
       }
     }
+  }
+  if (!strcmp (entry, "cancel")) {
+    printf ("\nCancelling removal...\n");
+    return;
   }
 }
