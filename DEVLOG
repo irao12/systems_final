@@ -20,11 +20,11 @@
     - was fixed with umask
 
 1/16/2021 12:00 PM (Gene, Alex)
- - Implemented a command to "add" entries to the password manager 
-    - Store data that the user inputs into a struct
-    - Use the struct to then add the data into a file 
+ - Implemented a command to "add" entries to the password manager (Gene)
+    - Store data that the user inputs into a struct (Alex)
+    - Use the struct to then add the data into a file (Alex, Gene)
     - Create a file underneath the user folder in the data directory with the name of entry
-- Implemented a command to "see" the contents of a specific entry
+- Implemented a command to "see" the contents of a specific entry (Gene)
     - Display the contents of a specific entry in the terminal 
 
 1/17/2021 8:00 P.M (Gene, Alex, Ivan)
