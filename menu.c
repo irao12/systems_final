@@ -8,7 +8,7 @@
 #include <errno.h>
 #include <dirent.h>
 
-void setup(){
+void setup() {
   DIR* dir = opendir("data");
   if (!dir){
     mkdir("data", 0777);
@@ -19,13 +19,28 @@ void setup(){
   }
 }
 
-void remover(char* buffer)
-{
-  char *returnval;
-  returnval = strchr(buffer,'\n');
-  if (returnval != NULL){
-    *returnval='\0';
+void trim (char * str) {
+  int index, i;
+  index = -1;
+  
+  i = 0;
+  while(str[i]) {
+    if(str[i] != ' ' && str[i] != '\t' && str[i] != '\n') {
+      index= i;
+    }
+    i++;
   }
+
+  str[index + 1] = '\0';
+}
+
+void remover(char * buffer) {
+  char * returnval;
+  returnval = strchr (buffer,'\n');
+  if (returnval != NULL){
+    *returnval = '\0';
+  }
+  trim (buffer);
 }
 
 void create_acc(){
@@ -106,5 +121,3 @@ char * login(int * entry){
   }
   return usr_entered;
 }
-
-     

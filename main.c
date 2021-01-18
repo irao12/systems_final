@@ -23,7 +23,7 @@ static void sighandler (int signo) {
 }
 */
 
-int main(void) {
+int main (void) {
 
   //signal (SIGINT, sighandler);
 
@@ -33,23 +33,25 @@ int main(void) {
 //while (1) {
   while (1) {
     char line [100];
-    printf("Welcome to the Password Manager\n");
+    printf ("Welcome to the Password Manager\n");
     int con = 1;
-    char *user;
-     while (con) {
-     printf("Enter \"login\" to log in or \"create\" to create a new account\nfor the password manager\n");
+    char * user;
+      while (con) {
+      printf("\nEnter \"login\" to log in or \"create\" to create a new account for the password manager\n");
+    
       fgets(line, sizeof(line), stdin);
       remover(line);
+      trim(line);
 
       if (!strcmp(line,"create")){
-       create_acc();
-       con = 0;
+        create_acc();
+        con = 0;
       } 
       else if (!strcmp(line, "login")){
         user = login(&entry);
         con = 0;
       }
-     else {
+      else {
         printf("Try again\n");
       }
     }
@@ -61,22 +63,31 @@ int main(void) {
 
     if (!child) {
       while (entry) {
-        char prompt[10];
-        printf("\nWould you like to \"see\", \"add\", or \"update\"\n");
-        fgets(prompt, sizeof(prompt), stdin);
+        char prompt [10];
+        printf ("\nWould you like to \"list\", \"see\", \"add\", \"update\", or \"remove\"\n");
+        fgets (prompt, sizeof(prompt), stdin);
         remover(prompt);
+
         if (!strcmp(prompt, "add")) {
           add(user);
         }
-       if (!strcmp(prompt, "see")) {
+        else if (!strcmp(prompt, "see")) {
           see(user);
         }
-      }
-      return 0;
+        else if (!strcmp(prompt, "update")) {
+          update_start(user);
+        }
+        else if (!strcmp(prompt, "list")){
+          list(user);
+        }
+        else if(!strcmp(prompt, "remove")){
+          remove_entry(user);
+        }
+      } 
     }
-
+    
     else {
-     int childpid = wait(&status);
+      int childpid = wait(&status);
     }
   }
 
