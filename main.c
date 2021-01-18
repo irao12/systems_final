@@ -11,45 +11,54 @@
 #include <sys/wait.h>
 
 int entry = 0;
-int stop = 1;
 
-/*
-static void sighandler (int signo) {
+static void sigmain (int signo) {
+  if (signo == SIGINT) {
+    printf ("\n\nExiting password manager...\n");
+    exit(0);
+  }
+}
+
+static void sigparent (int signo) {
 	if (signo == SIGINT) {
-		//printf("");
-    stop = 0
-		exit(0);
+     printf ("\n\nLogging out...\n");
 	}
 }
-*/
+
+static void sigchild(int signo){
+  if (signo == SIGINT) {
+    exit(0);
+  }
+}
 
 int main (void) {
-
-  //signal (SIGINT, sighandler);
-
+ 
   umask(0000);
   setup();
-
-//while (1) {
+  printf ("Welcome to the Password Manager, use ctrl+c to exit the password manager\n");
+  
   while (1) {
+    signal(SIGINT, sigmain);
     char line [100];
-    printf ("Welcome to the Password Manager\n");
     int con = 1;
     char * user;
       while (con) {
       printf("\nEnter \"login\" to log in or \"create\" to create a new account for the password manager\n");
-    
+  
       fgets(line, sizeof(line), stdin);
       remover(line);
-      trim(line);
 
       if (!strcmp(line,"create")){
         create_acc();
-        con = 0;
       } 
-      else if (!strcmp(line, "login")){
+      else if (!strcmp(line, "login")) {
         user = login(&entry);
-        con = 0;
+        if (!strcmp (user, "canceled")) {
+          con = 1;
+        }
+        else {
+          con = 0;
+        }
       }
       else {
         printf("Try again\n");
@@ -58,13 +67,15 @@ int main (void) {
 
     int status;
     int child;
+    char prompt [10];
 
     child = fork();
-
     if (!child) {
+      signal (SIGINT, sigchild);
+      printf ("\nLogged into account: %s\nUse ctrl+c to go back to the main menu\n", user);
+
       while (entry) {
-        char prompt [10];
-        printf ("\nWould you like to \"list\", \"see\", \"add\", \"update\", or \"remove\"\n");
+        printf ("\nWould you like to \"list\", \"see\", \"add\", \"update\" or \"remove\"\n");
         fgets (prompt, sizeof(prompt), stdin);
         remover(prompt);
 
@@ -75,18 +86,18 @@ int main (void) {
           see(user);
         }
         else if (!strcmp(prompt, "update")) {
-          update_start(user);
+          update_start (user);
         }
-        else if (!strcmp(prompt, "list")){
+        else if (!strcmp(prompt, "list")) {
           list(user);
         }
-        else if(!strcmp(prompt, "remove")){
+        else if(!strcmp(prompt, "remove")) {
           remove_entry(user);
         }
       } 
     }
-    
     else {
+      signal (SIGINT, sigparent);
       int childpid = wait(&status);
     }
   }
