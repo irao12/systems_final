@@ -1,11 +1,11 @@
 1/12/2021, 11:31 P.M (Ivan):
  - Added the login menu where you can create or log in to your Password Manager account
  - Added the functionality of creating an account
-   - checks if an account with the name you chose exists, asks you to repeat if there is
+   - Checks if an account with the name you chose exists, asks you to repeat if there is
     
 1/13/2021, 10:40 A.M (Ivan):
  - Added the functionality of logging into an account
-   -checks if an account with the username inputted exists. Reprompts you to enter one if it doesn't.
+   -Checks if an account with the username inputted exists. Reprompts you to enter one if it doesn't.
     If it does, it will ask you for a password. If the password is wrong, the whole login process will
     restart. If it is correct, you will enter the main menu
 
@@ -17,7 +17,7 @@
 1/14/2021, 6:42 P.M (Ivan, Gene, and Alex):
  - Implemented forks for the program so the child can return an int to the parent
  - Fixed a bug where file could not be added to the directories created
-    - was fixed with umask
+    - Was fixed with umask
 
 1/16/2021 12:00 PM (Gene, Alex)
  - Implemented a command to "add" entries to the password manager (Gene)
@@ -34,5 +34,12 @@
    - Once the entry is approved, the information is updated
  - Implemented a command to "list" entries in the password manager account (Gene)
    - Solves the problem of not knowing what accounts you already stored
- - Implemented a command to "remove" entries from the password manager (Alex)
+ - Implemented a command to "remove" entries from the password manager (Gene)
  - Fixed a bug where the program would exit out of the account and go back to the main menu if you were trying to see an entry that did not exist (Ivan)
+
+1/18/2021 5:00 P.M (Alex)
+ - Introduced quality of life updates
+   - Keyword "cancel" allows the user to back out of any fucntion at any point
+   - Introudced signals that allows for smoother transitioning logging out and exiting the password manager
+   - Update and remove functions now loop so that the user can correct any mistakes made
+ - Condensed update into one function instead of two
