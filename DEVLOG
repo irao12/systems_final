@@ -26,3 +26,13 @@
     - Create a file underneath the user folder in the data directory with the name of entry
 - Implemented a command to "see" the contents of a specific entry
     - Display the contents of a specific entry in the terminal 
+
+1/17/2021 8:00 P.M (Gene, Alex, Ivan)
+ - Implemented a command to "update" entries in the password manager account (Alex)
+   - Prompts the user to input which piece of information they want to update
+   - The user inputs what they want it to change to and a preview of the entry is shown
+   - Once the entry is approved, the information is updated
+ - Implemented a command to "list" entries in the password manager account (Gene)
+   - Solves the problem of not knowing what accounts you already stored
+ - Implemented a command to "remove" entries from the password manager (Alex)
+ - Fixed a bug where the program would exit out of the account and go back to the main menu if you were trying to see an entry that did not exist (Ivan)
