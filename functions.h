@@ -17,7 +17,6 @@ void convert (struct acct *anEntry, char * user);
 
 void see (char* user);
 void add (char* userAcct);
-void update (char * user, char * new_data, char * account_type, char* entry_type);
 void update_start(char * user);
 void list(char *user);
 void remove_entry(char *user);
