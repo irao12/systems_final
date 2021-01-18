@@ -37,9 +37,9 @@
  - Implemented a command to "remove" entries from the password manager (Gene)
  - Fixed a bug where the program would exit out of the account and go back to the main menu if you were trying to see an entry that did not exist (Ivan)
 
-1/18/2021 5:30 P.M (Alex)
+1/18/2021 5:30 P.M (Alex, Ivan)
  - Introduced quality of life updates
-   - Keyword "cancel" allows the user to back out of any fucntion at any point
-   - Implemented signals that allows for smoother transitioning logging out and exiting the password manager
-   - Update and remove functions now loop so that the user can correct any mistakes made
- - Condensed update into one function instead of two
+   - Keyword "cancel" allows the user to back out of any fucntion at any point (Alex)
+   - Implemented signals that allows for smoother transitioning logging out and exiting the password manager (Alex, Ivan)
+   - Update and remove functions now loop so that the user can correct any mistakes made (Alex)
+ - Condensed update into one function instead of two (Alex)
