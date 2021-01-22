@@ -16,16 +16,18 @@ struct acct * new_entry (char * type, char* usr, char *pw, char* mail) {
   struct acct * newentry;
   time_t curtime;
   time(&curtime);
-  char buffer[50];
+  char buffer[100];
   
   newentry = malloc(sizeof(struct acct));
+
   strncpy (newentry->acctType, type, sizeof(newentry->acctType)-1);
+
   strncpy (newentry->username, usr, sizeof(newentry->username)-1);
-  //strcat(newentry->username, ",");
+
   strncpy (newentry->password, pw, sizeof(newentry->password)-1);
-  //strcat(newentry->password, ",");
+
   strncpy (newentry->email, mail, sizeof(newentry->email)-1);
-  //strcat(newentry->email, ",");
+
   strncpy (newentry->lastUpdated, ctime_r(&curtime,buffer), sizeof(newentry->lastUpdated)-1);
 
   return newentry;
@@ -33,40 +35,50 @@ struct acct * new_entry (char * type, char* usr, char *pw, char* mail) {
 
 //prints entry
 void printEntry (char * path, char * user){
-  char x [100];
-  strncpy(x, "data/", sizeof(x)-1);
-  strncat(x, user, sizeof(x)-1);
-  strncat(x, "/", sizeof(x)-1);
-  strncat(x, path, sizeof(x)-1);
-  remover(x);
+  char loc [200];
+  strncpy(loc, "data/", sizeof(loc)-1);
+  strncat(loc, user, sizeof(loc)-1);
+  strncat(loc, "/", sizeof(loc)-1);
+  strncat(loc, path, sizeof(loc)-1);
+  remover(loc);
   int i;
-  int fd = open(x, O_RDONLY);
+  int fd = open(loc, O_RDONLY);
   if (fd < 0) {
     printf("\nEntry \"%s\" does not exist\n", path);
     return;
   }
+
   char line[100];
   char * y = line;
   char * token, *p;
+
   FILE* fp;
-  fp = fopen(x, "r");
+  fp = fopen(loc, "r");
   fgets(y, 100, fp);
   p = y;
   token = strsep(&p,",");
-  printf("\nAccount type: ");
-  printf("%s\n", token);
+  printf("\nAccount type: %s\n", token);
+  
   token = strsep(&p,",");
-  printf("Username: ");
-  printf("%s\n", token);
+  trim(token);
+  if (strcmp(token, "0")){
+    printf("Email: %s\n", token);
+  }
+
   token = strsep(&p,",");
-  printf("Password: ");
-  printf("%s\n", token);
+  trim(token);
+  if (strcmp(token,"0")){
+    printf("Username: %s\n", token);
+  }
+
   token = strsep(&p,",");
-  printf("Email: ");
-  printf("%s\n", token);
+  trim(token);
+  if (strcmp(token,"0")){
+    printf("Password: %s\n", token);
+  }
+
   token = strsep(&p,",");
-  printf("Last updated: ");
-  printf("%s\n", token);  
+  printf("Last updated: %s", token);  
 }
 
 //converts struct and puts data into the file
@@ -87,11 +99,11 @@ void convert(struct acct *anEntry, char * user){
   char info[100];
   strncpy(info, anEntry->acctType, sizeof(info)-1);
   strncat(info, ",", sizeof(info)-1);
+  strncat(info,anEntry->email, sizeof(info)-1);
+  strncat(info, ",", sizeof(info)-1);
   strncat(info,anEntry->username, sizeof(info)-1);
   strncat(info, ",", sizeof(info)-1);
   strncat(info,anEntry->password, sizeof(info)-1);
-  strncat(info, ",", sizeof(info)-1);
-  strncat(info,anEntry->email, sizeof(info)-1);
   strncat(info, ",", sizeof(info)-1);
   strncat(info,anEntry->lastUpdated, sizeof(info)-1);
   
@@ -143,9 +155,18 @@ void add (char * userAcct) {
 
     if (!strcmp(type, "cancel")) {
       break;
+    }
+
+    printf("\nWhat is your email associated with said account? Enter \"0\" if N/A\n");
+    fgets(mail, sizeof(mail), stdin);
+    remover(mail);
+
+    if (!strcmp(mail, "cancel")) {
+      break;
     } 
+         
           
-    printf("\nWhat is the username of said account?\n");
+    printf("\nWhat is the username associated with said account? Enter \"0\" if N/A\n");
     fgets(usr,sizeof(usr),stdin);
     remover(usr);
 
@@ -153,7 +174,7 @@ void add (char * userAcct) {
       break;
     }      
       
-    printf("\nWhat is the password of said account?\n");
+    printf("\nWhat is the password associated with said account? Enter \"0\" if N/A\n");
     fgets(pw, sizeof(pw), stdin);
     remover(pw);
 
@@ -161,16 +182,8 @@ void add (char * userAcct) {
       break;
     } 
             
-    printf("\nWhat is your email of said account?\n");
-    fgets(mail, sizeof(mail), stdin);
-    remover(mail);
-
-    if (!strcmp(mail, "cancel")) {
-      break;
-    } 
-        
     acc_entry = new_entry(type,usr,pw,mail);
-    printf("\nAccount type: %s\nUsername: %s\nPassword: %s\nEmail: %s\n", acc_entry->acctType, acc_entry->username, acc_entry->password, acc_entry->email);
+    printf("\nAccount type: %s\nEmail: %s\nUsername: %s\nPassword: %s\n", acc_entry->acctType, acc_entry->email, acc_entry->username, acc_entry->password);
     printf("\nIs this correct? \"yes\" or \"no\"\n");
           
     while(1) {
@@ -200,6 +213,7 @@ void add (char * userAcct) {
     convert(acc_entry,userAcct);    
     printf("\nEntry added\n");
   }
+  free(acc_entry);
 }
 
 //account_type-what type of account it is
@@ -211,10 +225,11 @@ void update_start (char * user) {
   char update_acc [100];
   char update_entry [100];
   char update_data [100];
-
+  char prompt [10];
   printf ("\nUpdating entry...\nType \"cancel\" at anytime to go back\n");
   
   int con = 1;
+  int con2 = 1;
   while (con) {
     while (1) {
       printf ("\nWhat account would you like to update?\n");
@@ -245,9 +260,9 @@ void update_start (char * user) {
     }
 
     printEntry (update_acc, user);
-
+    while (con2){
     while (1) {
-      printf ("What entry would you like to update: \"username\" \"password\" \"email\"\n"); 
+      printf ("\nWhat entry would you like to update: \"email\", \"username\", or \"password\" \n"); 
       fgets (update_entry, sizeof(update_entry), stdin);
       remover (update_entry);
 
@@ -322,7 +337,7 @@ void update_start (char * user) {
     printf("\nAccount type: %s\nUsername: %s\nPassword: %s\nEmail: %s\n", temp_entry->acctType, temp_entry->username, temp_entry->password, temp_entry->email);
     printf("\nIs this correct? \"yes\" or \"no\"\n");
 
-    char prompt [10];
+
     while (1) {
       fgets (prompt, sizeof(prompt), stdin);
       remover(prompt);
@@ -344,20 +359,37 @@ void update_start (char * user) {
       }
       else printf("Is this correct? \"yes\" or \"no\"\n");
     }
-  }
+  
   if (!strcmp (update_acc, "cancel") || !strcmp(update_entry, "cancel") || !strcmp(update_data, "cancel")) {
     printf ("\nCancelling update...\n");
     return;
   }
+  while (1){
+    printf("\nAre you finished updating this account? \"yes\" or \"no\"\n");
+    fgets(prompt, sizeof(prompt), stdin);
+    remover(prompt);
+    trim(prompt);
+    if (!strcmp(prompt, "yes")) {
+      con2 = 0;
+      con = 0;
+      break;
+    }
+    else if (!strcmp(prompt, "no") || !strcmp(prompt, "cancel")){
+      break;
+    }
+  }
+  free(temp_entry);
+  }
+  }
 }
 
 void list(char *user){
+  int found = 0;
   char loc[100];
   DIR *d;
   struct dirent *entry;
   
   printf("\n");
-  printf("Listing current entries...\n");
   remover(user);
   strncpy(loc, "data/", sizeof(loc)-1);
   strncat(loc, user, sizeof(loc)-1);
@@ -373,9 +405,14 @@ void list(char *user){
     }
   while (entry != NULL){
     if (entry->d_type==DT_REG){
+      if (!found) printf("Listing current entries...\n");
+      found = 1;
       printf("%s\n",entry->d_name);
     }
     entry=readdir(d);
+  }
+  if (!found){
+    printf("There are no entries\n");
   }
   closedir(d);
 
