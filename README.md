@@ -59,6 +59,6 @@ In the prompt menu, the user is able to:
 
 Note: While the user is listing, seeing, adding, updating,or removing, they can enter "cancel" at any step to return to the prompt menu
 
-- The user can log out of the password manager account and returning to the main menu by pressing ctrl+c or sending a SIGINT signal. Pressing ctrl+c while in the main menu will allow the user to exit the password manager
+- The user can log out of the password manager account and return to the main menu by pressing ctrl+c or sending a SIGINT signal. Pressing ctrl+c while in the main menu will allow the user to exit the password manager
 
 
