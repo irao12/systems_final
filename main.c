@@ -52,7 +52,7 @@ int main (void) {
         create_acc();
       } 
       else if (!strcmp(line, "login")) {
-        login(&entry, user);
+        user = login(&entry);
         if (!strcmp (user, "canceled")) {
           con = 1;
         }
@@ -101,5 +101,6 @@ int main (void) {
       int childpid = wait(&status);
     }
   }
+
   return 0;
 }
