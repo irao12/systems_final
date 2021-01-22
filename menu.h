@@ -7,7 +7,7 @@ void remover(char* buffer);
 
 void create_acc();
 
-char * login(int * entry);
+void login(int * entry, char * user);
 
 void setup();
 
