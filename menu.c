@@ -129,13 +129,13 @@ void create_acc() {
   }
 }
 
-char * login(int * entry) {
+void login(int * entry, char * user) {
   signal (SIGINT, siglogin);
 
   printf ("\nLogging in...\nType \"cancel\" at anytime to go back to main menu\n");
-  char * usr_entered = malloc(sizeof(char)*51);
+  char usr_entered[100];
   char pass[31], pass_entered[31];
-  char location2[100];
+  char location2[200];
   int con = 1;
   FILE* fp;
   while (con) {
@@ -153,6 +153,7 @@ char * login(int * entry) {
     fp = fopen(location2, "r");
 
     if (!fp) {
+      printf("%s\n", strerror(errno));
       printf("Account with that name does not exist\n");
     }
     else {
@@ -181,8 +182,8 @@ char * login(int * entry) {
   if (!strcmp(usr_entered, "cancel") || !strcmp(pass_entered, "cancel")) {
     char * backed_out = "canceled";
     *entry = 0;
-    return backed_out;
+    return;
   }
-  
-  return usr_entered;
+  strcpy(user, usr_entered);
+  return;
 }
