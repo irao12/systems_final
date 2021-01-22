@@ -16,7 +16,7 @@ struct acct * new_entry (char * type, char* usr, char *pw, char* mail) {
   struct acct * newentry;
   time_t curtime;
   time(&curtime);
-  char buffer[50];
+  char buffer[100];
   
   newentry = malloc(sizeof(struct acct));
 
@@ -35,7 +35,7 @@ struct acct * new_entry (char * type, char* usr, char *pw, char* mail) {
 
 //prints entry
 void printEntry (char * path, char * user){
-  char loc [100];
+  char loc [200];
   strncpy(loc, "data/", sizeof(loc)-1);
   strncat(loc, user, sizeof(loc)-1);
   strncat(loc, "/", sizeof(loc)-1);
