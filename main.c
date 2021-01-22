@@ -21,7 +21,8 @@ static void sigmain (int signo) {
 
 static void sigparent (int signo) {
 	if (signo == SIGINT) {
-     printf ("\n\nLogging out...\n");
+     if (entry) printf ("\n\nLogging out...\n"); 
+     if (!entry) exit(0);
 	}
 }
 
@@ -72,6 +73,7 @@ int main (void) {
     child = fork();
     if (!child) {
       signal (SIGINT, sigchild);
+      if (entry)
       printf ("\nLogged into account: %s\nUse ctrl+c to go back to the main menu\n", user);
 
       while (entry) {
