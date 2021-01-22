@@ -52,7 +52,7 @@ int main (void) {
         create_acc();
       } 
       else if (!strcmp(line, "login")) {
-        user = login(&entry);
+        login(&entry, user);
         if (!strcmp (user, "canceled")) {
           con = 1;
         }
