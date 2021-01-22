@@ -22,7 +22,6 @@ static void sigmain (int signo) {
 static void sigparent (int signo) {
 	if (signo == SIGINT) {
      if (entry) printf ("\n\nLogging out...\n"); 
-     if (!entry) exit(0);
 	}
 }
 
@@ -75,6 +74,7 @@ int main (void) {
       signal (SIGINT, sigchild);
       if (entry)
       printf ("\nLogged into account: %s\nUse ctrl+c to go back to the main menu\n", user);
+      else break;
 
       while (entry) {
         printf ("\nWould you like to \"list\", \"see\", \"add\", \"update\" or \"remove\"\n");
