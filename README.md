@@ -19,7 +19,7 @@ The Password Manager (not very secure) will allow the user to store account info
 - <dirent.h>
 
 ## Instructions
-Note: When the program prompts you to type in something, the user should type whatever is in the quotations without the quotations.
+Note: When the program prompts you to type in something, the user should type whatever is in the quotations without the quotations.\
 Ex: If the program prompts you to enter "login", the user would type and enter login.
 
 After the program runs, the user enters the main menu. In the main menu, the user has the option to log into their password manager account—by typing "login" or creating a new password manager account—by typing "create".
