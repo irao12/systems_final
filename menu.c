@@ -129,27 +129,27 @@ void create_acc() {
   }
 }
 
-char * login(int * entry) {
+void login(int * entry, char * user) {
   signal (SIGINT, siglogin);
 
   printf ("\nLogging in...\nType \"cancel\" at anytime to go back to main menu\n");
-  char * usr_entered = malloc(sizeof(char)*51);
+
   char pass[31], pass_entered[31];
-  char location2[100];
+  char location2[200];
   int con = 1;
   FILE* fp;
   while (con) {
     printf("\nEnter your username\n");
-    fgets(usr_entered, sizeof(usr_entered), stdin);
-    remover(usr_entered);
+    fgets(user, 100, stdin);
+    remover(user);
 
-    if (!strcmp(usr_entered, "cancel")) {
+    if (!strcmp(user, "cancel")) {
       con = 0;
       break;
     }
 
-    strcpy(location2, "data/accounts/");
-    strcat(location2, usr_entered);
+    strncpy(location2, "data/accounts/", sizeof(location2)-1);
+    strncat(location2, user, sizeof(location2)-1);
     fp = fopen(location2, "r");
 
     if (!fp) {
@@ -178,11 +178,10 @@ char * login(int * entry) {
     }
   }
 
-  if (!strcmp(usr_entered, "cancel") || !strcmp(pass_entered, "cancel")) {
-    char * backed_out = "canceled";
+  if (!strcmp(user, "cancel") || !strcmp(pass_entered, "cancel")) {
     *entry = 0;
-    return backed_out;
+    return;
   }
   
-  return usr_entered;
+  return;
 }
