@@ -41,7 +41,7 @@ int main (void) {
     signal(SIGINT, sigmain);
     char line [100];
     int con = 1;
-    char * user;
+    char user[100];
       while (con) {
       printf("\nEnter \"login\" to log in or \"create\" to create a new account for the password manager\n");
   
@@ -52,7 +52,7 @@ int main (void) {
         create_acc();
       } 
       else if (!strcmp(line, "login")) {
-        user = login(&entry);
+        login(&entry, user);
         if (!strcmp (user, "canceled")) {
           con = 1;
         }
