@@ -21,7 +21,7 @@ static void sigmain (int signo) {
 
 static void sigparent (int signo) {
 	if (signo == SIGINT) {
-     if (entry) printf ("\n\nLogging out...\n"); 
+     if (entry) printf ("\nLogging out...\n"); 
 	}
 }
 
