@@ -45,7 +45,7 @@
  - Condensed update into one function instead of two (Alex)
 
 1/22/2021 2:20 P.M (Ivan, Gene)
- - Added the feature of entering "0" when prompted to enter an email, username, or password to tell the password manager, there isn't one associated with the account (Ivan)
+ - Added the feature of entering "0" when prompted to enter an email, username, or password to tell the password manager there isn't one associated with the account (Ivan)
  - Made it so the email associated with the account is shown before the password (Ivan)
  - Made it so you can update multiple pieces of information for each account before you are brought to the prompt menu (Ivan)
  - Fixed a bug in login that made it impossible to log in if the username was long. (Ivan, Gene)
