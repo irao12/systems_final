@@ -69,7 +69,7 @@ void create_acc() {
   int i;
   int con = 1;
   while (con) {
-    printf ("\nEnter a username for this account\n");
+    printf ("\nEnter a username for your password manager account\n");
     fgets (usr, sizeof(usr), stdin);
     remover (usr);
 
@@ -86,7 +86,7 @@ void create_acc() {
     else {
       file = open (location, O_RDWR | O_CREAT, 0666);
       while (1) {
-        printf ("\nEnter a password for this account (max 30 characters)\n");
+        printf ("\nEnter a password for your password manager account (max 30 characters)\n");
         fgets (pass, sizeof(pass), stdin);
         remover(pass);
 
@@ -139,7 +139,7 @@ void login(int * entry, char * user) {
   int con = 1;
   FILE* fp;
   while (con) {
-    printf("\nEnter your username\n");
+    printf("\nEnter your password manager username\n");
     fgets(user, 100, stdin);
     remover(user);
 
