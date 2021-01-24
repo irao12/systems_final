@@ -3,7 +3,20 @@
 Group Members: Ivan Rao, Gene Ye, Alex Zhang (Period 10)
 
 ## Description
-The Password Manager (not very secure) will allow the user to store account information such as emails, usernames, and passwords used for accounts. Every user would have to create their own account for the password manager before they can store information and would have to log in to have access to the information. 
+The Password Manager (not very secure) is utilized through the terminal and allows the user to store account information such as emails, usernames, and passwords used for accounts. Every user would have to create their own account for the password manager before they can store information and would have to log in to have access to the information. 
+
+## Technical Design:
+- Processes
+  Uses forks to create a child process that executes the main part of the program while the parent process waits and loops so the password manager continues until exited. This allows the two processes two have different responses to signals. 
+
+- Allocating Memory:
+  Allocates memory for the account structs that will hold the account information. By allocating memory for the structs, we can pass on the pointer to functions and the functions will be able to the change the structs.
+
+- Working with files:
+  Uses files to store the account information for the password manager and the other accounts you store. The files will store informaton and be read to print the account information. 
+
+- Signals:
+  Uses signals to control how exiting works so that theuser can back out to the main menu and the program can continue to provide functionality.
 
 ## Required Libraries:
 - <stdlib.h> 
@@ -19,10 +32,10 @@ The Password Manager (not very secure) will allow the user to store account info
 - <dirent.h>
 
 ## Instructions
-Note: When the program prompts you to type in something, the user should type whatever is in the quotations without the quotations.\
-Ex: If the program prompts you to enter "login", the user would type and enter login.
+Note: When the program prompts you to type in something, the user should type whatever is in the quotations without the quotations.
+- Ex: If the program prompts you to enter "login", the user would type and enter login
 
-After the program runs, the user enters the main menu. In the main menu, the user has the option to log into their password manager account—by typing "login" or creating a new password manager account—by typing "create".
+After the program runs, the user enters the main menu. In the main menu, the user has the option to log into their password manager account—by typing "login"—or creating a new password manager account—by typing "create".
 
 Once the user has logged in, they will enter the prompt menu.
 In the prompt menu, the user is able to:
