@@ -32,7 +32,7 @@ The Password Manager (not very secure) is utilized through the terminal and allo
 - <dirent.h>
 
 ## Instructions
-Note: When the program prompts the user to type in something, the user should type exactly what is quoted without the quotation marks.
+Note: When the program prompts the user to type in something, the user should type exactly what is quoted without the quotation marks. Do not enter without typing to avoid bugs.
 - Ex: If the program prompts you to enter "login", the user would type and enter:
 
 `login`
