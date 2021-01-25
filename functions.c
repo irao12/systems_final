@@ -117,7 +117,7 @@ void see (char * user) {
   fgets(text, sizeof(text), stdin);
   remover(text);
 
-  if (!strcmp(text, "cancel")) {
+  if (!strcmp(text, "cancel") || !strcmp(text, "")) {
     return;
   }
   else {
@@ -351,7 +351,7 @@ void update_start (char * user) {
         break;
       }
       else if (!strcmp(prompt, "no")) {
-        printf ("\nAccount information was not updated\n");
+        printf ("\nAccount was not updated\n");
         break;
       }
       else if (!strcmp(prompt, "cancel")) {
