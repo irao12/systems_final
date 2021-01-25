@@ -48,13 +48,13 @@ void printEntry (char * path, char * user){
     return;
   }
 
-  char line[100];
+  char line[400];
   char * y = line;
   char * token, *p;
 
   FILE* fp;
   fp = fopen(loc, "r");
-  fgets(y, 100, fp);
+  fgets(y, 400, fp);
   p = y;
   token = strsep(&p,",");
   printf("\nAccount type: %s\n", token);
@@ -83,7 +83,7 @@ void printEntry (char * path, char * user){
 
 //converts struct and puts data into the file
 void convert(struct acct *anEntry, char * user){
-  char loc[100];
+  char loc[200];
   strncpy(loc, "data/", sizeof(loc)-1);
   strcat(loc, user);
   strcat(loc, "/");
@@ -96,7 +96,7 @@ void convert(struct acct *anEntry, char * user){
     printf("error: %s\n",strerror(errno));
   }
 
-  char info[100];
+  char info[400];
   strncpy(info, anEntry->acctType, sizeof(info)-1);
   strncat(info, ",", sizeof(info)-1);
   strncat(info,anEntry->email, sizeof(info)-1);
@@ -126,7 +126,7 @@ void see (char * user) {
 }
 
 void add (char * userAcct) {
-  char text [100], type [100], usr [100], pw [100], mail [100], prompt [10], loc [100];
+  char text [100], type [100], usr [100], pw [100], mail [100], prompt [10], loc [200];
   int con = 1;
   struct acct *acc_entry;
 
@@ -240,7 +240,7 @@ void update_start (char * user) {
         break;
       } 
 
-      char loc [100];
+      char loc [200];
       strncpy (loc, "data/", sizeof(loc)-1);
       strncat (loc, user, sizeof(loc)-1);
       strncat (loc, "/", sizeof(loc)-1);
@@ -295,19 +295,19 @@ void update_start (char * user) {
     char * password;
     char * email;
 
-    char loc [100];
+    char loc [200];
     strncpy(loc, "data/", sizeof(loc)-1);
     strncat(loc, user, sizeof(loc)-1);
     strncat(loc, "/", sizeof(loc)-1);
     strncat(loc, update_acc, sizeof(loc)-1);
     remover(loc);
     
-    char line [100];
+    char line [400];
     char * y = line;
     char * token, * p;
     FILE * fp;
     fp = fopen(loc, "r");
-    fgets (y, 100, fp);
+    fgets (y, 400, fp);
     p = y;
     fclose(fp);
 
@@ -387,7 +387,7 @@ void update_start (char * user) {
 
 void list(char *user){
   int found = 0;
-  char loc[100];
+  char loc[200];
   DIR *d;
   struct dirent *entry;
   
@@ -421,7 +421,7 @@ void list(char *user){
 }
 
 void remove_entry (char * user){
-  char loc[100], entry[100];
+  char loc[200], entry[100];
   int con = 1;
 
   printf ("\nRemoving entry...\nType \"cancel\" at anytime to go back\n");
