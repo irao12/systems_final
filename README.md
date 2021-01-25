@@ -76,4 +76,6 @@ Note: While the user is listing, seeing, adding, updating, or removing, they can
 
 - The user can log out of the password manager account and return to the main menu by pressing ctrl+c or sending a SIGINT signal. Pressing ctrl+c while in the main menu will allow the user to exit the password manager
 
+## Known Bugs
+ - When updating, if the user enters without typing anything after the program asks for the account the user wants to update, the program breaks and returns to the main menu
 
