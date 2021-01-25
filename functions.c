@@ -313,28 +313,30 @@ void update_start (char * user) {
 
     if (!strcmp(update_entry, "username")) {
       strsep (&p, ",");
+      email = strsep(&p,",");
       username = update_data;
       strsep (&p,",");
       password = strsep (&p, ",");
-      email = strsep(&p,",");
     }
     else if (!strcmp(update_entry, "password")) {
       strsep (&p, ",");
+      email = strsep(&p, ",");
       username = strsep (&p, ",");
       password = update_data;
       strsep (&p, ","); 
-      email = strsep(&p, ",");
     }
     else if (!strcmp(update_entry, "email")) {
       strsep (&p, ",");
-      username = strsep (&p, ",");
-      password = strsep (&p, ",");
       email = update_data;
       strsep (&p, ",");
+      username = strsep (&p, ",");
+      password = strsep (&p, ",");
     }
 
     temp_entry = new_entry (update_acc, username, password, email);
-    printf("\nAccount type: %s\nUsername: %s\nPassword: %s\nEmail: %s\n", temp_entry->acctType, temp_entry->username, temp_entry->password, temp_entry->email);
+    printf("\nAccount type: %s\nEmail: %s\nUsername: %s\nPassword: %s\n", 
+    temp_entry->acctType,
+    temp_entry->email,temp_entry->username, temp_entry->password);
     printf("\nIs this correct? \"yes\" or \"no\"\n");
 
 
