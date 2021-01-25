@@ -34,6 +34,7 @@ The Password Manager (not very secure) is utilized through the terminal and allo
 ## Instructions
 Note: When the program prompts you to type in something, the user should type whatever is quoted without the quotation marks.
 - Ex: If the program prompts you to enter "login", the user would type and enter:
+
 `login`
 
 After the program runs, the user enters the main menu. In the main menu, the user has the option to log into their password manager account—by typing "login"—or creating a new password manager account—by typing "create".
