@@ -37,7 +37,7 @@ Note: When the program prompts you to type in something, the user should type wh
 
 `login`
 
-After the program runs, the user enters the main menu. In the main menu, the user has the option to log into their password manager account—by typing "login"—or creating a new password manager account—by typing "create".
+After the program runs, the user enters the main menu. In the main menu, the user has the option to log into their password manager account—by entering "login"—or creating a new password manager account—by entering "create".
 
 Once the user has logged in, they will enter the prompt menu.
 In the prompt menu, the user is able to:
@@ -53,17 +53,17 @@ In the prompt menu, the user is able to:
 3. Add an account entry to the password manager
  - by entering "add" while in the prompt menu
   - The password manager will prompt the user to input the account type, username, password, and email associated with the account.
-    - If the account you are adding doesn't have an email, username, or password associated with it, just enter "0" and it exempt that piece of information when you see an account.
+    - If the account you are adding doesn't have an email, username, or password associated with it, just enter "0" and the program will exempt that piece of information when you see an account.
   - The password manager shows a preview of the account entry and ask to confirm the information
     - If it is not confirmed, the user will reinput the information
-    - Once it is confirmed, account entry will be stored as a file
+    - Once it is confirmed, the account entry will be stored as a file
 
 4. Update an account entry that was stored in the password manager
  - by entering "update" while in the prompt menu
    - The password manager will prompt you to put the account you want to update. This is the account type.
    - Once an account is entered to update, it's information will be displayed.
    - The user will then be prompted to enter which piece of information (username, password, or email) they want to change.
-    - When a piece of information is entered, the user is prompted to input what they want to change it to, and ask the user to confirm if it's correct
+    - When a piece of information is entered, the user is prompted to input what they want to change it to and asked to confirm the update
     - The password manager then asks if the user is finished updating. If they enter "no", they will be able to change another piece of information. If they enter "yes", they will return to the prompt menu
 
   5. Remove an account entry that was stored in the password manager
