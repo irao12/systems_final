@@ -6,8 +6,8 @@ Group Members: Ivan Rao, Gene Ye, Alex Zhang (Period 10)
 The Password Manager (not very secure) is utilized through the terminal and allows the user to store account information such as emails, usernames, and passwords used for accounts. Every user would have to create their own account for the password manager before they can store information and would have to log in to have access to the information. 
 
 ## Technical Design:
-- Processes
-- Uses forks to create a child process that executes the main part of the program while the parent process waits and loops so the password manager continues until exited. This allows the two processes two have different responses to signals. 
+- Processes:
+ Uses forks to create a child process that executes the main part of the program while the parent process waits and loops so the password manager continues until exited. This allows the two processes two have different responses to signals. 
 
 - Allocating Memory:
   Allocates memory for the account structs that will hold the account information. By allocating memory for the structs, we can pass on the pointer to functions and the functions will be able to the change the structs.
