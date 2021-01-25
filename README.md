@@ -16,7 +16,7 @@ The Password Manager (not very secure) is utilized through the terminal and allo
   Uses files to store the account information for the password manager and the other accounts you store. The files will store informaton and be read to print the account information. 
 
 - Signals:
-  Uses signals to control how exiting works so that theuser can back out to the main menu and the program can continue to provide functionality.
+  Uses signals to control how exiting works so that the user can back out to the main menu and the program can continue to provide functionality.
 
 ## Required Libraries:
 - <stdlib.h> 
@@ -72,7 +72,7 @@ In the prompt menu, the user is able to:
    - Once it is confirmed that they want to remove that account entry, the file associated with the account will be removed.
     - Otherwise, nothing happens and the user is prompted to input the account they want to remove again
 
-Note: While the user is listing, seeing, adding, updating,or removing, they can enter "cancel" at any step to return to the prompt menu
+Note: While the user is listing, seeing, adding, updating, or removing, they can enter "cancel" at any step to return to the prompt menu
 
 - The user can log out of the password manager account and return to the main menu by pressing ctrl+c or sending a SIGINT signal. Pressing ctrl+c while in the main menu will allow the user to exit the password manager
 
