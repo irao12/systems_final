@@ -49,3 +49,8 @@
  - Made it so the email associated with the account is shown before the password (Ivan)
  - Made it so you can update multiple pieces of information for each account before you are brought to the prompt menu (Ivan)
  - Fixed a bug in login that made it impossible to log in if the username was long. (Ivan, Gene)
+ 
+1/24/2021 8:01 P.M (Ivan)
+ - Fixed a bug that caused a segmentation error after you logged in
+ - Fixed a bug where if you typed "cancel" during the login, it would not go back to the main menu.
+ - Fixed a bug that updated the account information incorrectly.
