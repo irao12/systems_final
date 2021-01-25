@@ -7,7 +7,7 @@ The Password Manager (not very secure) is utilized through the terminal and allo
 
 ## Technical Design:
 - Processes
-  Uses forks to create a child process that executes the main part of the program while the parent process waits and loops so the password manager continues until exited. This allows the two processes two have different responses to signals. 
+- Uses forks to create a child process that executes the main part of the program while the parent process waits and loops so the password manager continues until exited. This allows the two processes two have different responses to signals. 
 
 - Allocating Memory:
   Allocates memory for the account structs that will hold the account information. By allocating memory for the structs, we can pass on the pointer to functions and the functions will be able to the change the structs.
