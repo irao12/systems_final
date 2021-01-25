@@ -351,7 +351,7 @@ void update_start (char * user) {
         break;
       }
       else if (!strcmp(prompt, "no")) {
-        printf ("\nAccount was not updated\n");
+        printf ("\nAccount information was not updated\n");
         break;
       }
       else if (!strcmp(prompt, "cancel")) {
